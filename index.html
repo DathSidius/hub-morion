@@ -51,7 +51,6 @@ body {
     position: relative;
 }
 
-/* ===== Декоративные свечения на фоне ===== */
 .glow {
     position: fixed;
     pointer-events: none;
@@ -70,7 +69,6 @@ body {
     background: radial-gradient(circle, var(--accent-2-glow) 0%, transparent 70%);
 }
 
-/* ===== Хаб ===== */
 .hub {
     position: relative;
     z-index: 1;
@@ -113,7 +111,6 @@ h1 {
     font-weight: 400;
 }
 
-/* ===== Карточки ===== */
 .cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -192,14 +189,12 @@ h1 {
     color: var(--accent-hover);
 }
 
-/* ===== Футер ===== */
 footer {
     font-size: 13px;
     color: var(--text-muted);
     letter-spacing: 0.06em;
 }
 
-/* ===== Мобильные ===== */
 @media (max-width: 700px) {
     .cards {
         grid-template-columns: 1fr;
@@ -225,14 +220,14 @@ footer {
     </p>
 
     <div class="cards">
-        <a href="https://lore.morion-world.ru" class="card">
+        <a href="https://lore.morion-world.ru" target="_blank" rel="noopener noreferrer" class="card">
             <div class="card-icon">📖</div>
             <h2>Лор</h2>
             <p>История, государства, фракции, персонажи и легенды Морриона — всё, что нужно знать о мире.</p>
             <span class="card-link">Читать →</span>
         </a>
 
-        <a href="https://map.morion-world.ru" class="card">
+        <a href="https://map.morion-world.ru" target="_blank" rel="noopener noreferrer" class="card">
             <div class="card-icon">🗺️</div>
             <h2>Карта</h2>
             <p>Интерактивная карта мира с городами, крепостями, лесами и тайными местами.</p>
