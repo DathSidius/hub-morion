@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моррион — Мир приключений</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0a0a0a;
+    --bg-card: #16161a;
+    --bg-card-hover: #1d1d22;
+    --border: #262629;
+    --border-hover: #3a3a40;
+    --text: #ececf0;
+    --text-dim: #a0a0a8;
+    --text-muted: #6b6b75;
+    --accent: #6b8afd;
+    --accent-hover: #8aa4ff;
+    --accent-glow: rgba(107, 138, 253, 0.25);
+    --accent-2: #b56bff;
+    --accent-2-glow: rgba(181, 107, 255, 0.2);
+    --radius: 16px;
+    --font-heading: 'Philosopher', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+}
+
+/* ===== Декоративные свечения на фоне ===== */
+.glow {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+}
+.glow-1 {
+    top: -120px; left: -120px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+}
+.glow-2 {
+    bottom: -160px; right: -120px;
+    width: 620px; height: 620px;
+    background: radial-gradient(circle, var(--accent-2-glow) 0%, transparent 70%);
+}
+
+/* ===== Хаб ===== */
+.hub {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+}
+
+.logo {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 30px var(--accent-glow));
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(42px, 8vw, 84px);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent) 50%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 60px var(--accent-glow);
+}
+
+.subtitle {
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-width: 620px;
+    margin: 0 auto 60px;
+    font-weight: 400;
+}
+
+/* ===== Карточки ===== */
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 36px 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 50%, var(--accent-2-glow) 100%);
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+}
+.card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
+}
+.card:hover::before { opacity: 0.4; }
+
+.card-icon {
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.card h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    flex: 1;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    transition: gap 0.25s, color 0.25s;
+}
+.card:hover .card-link {
+    gap: 12px;
+    color: var(--accent-hover);
+}
+
+/* ===== Футер ===== */
+footer {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+}
+
+/* ===== Мобильные ===== */
+@media (max-width: 700px) {
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+    .card { padding: 28px 24px; }
+    .logo { font-size: 64px; }
+    .subtitle { margin-bottom: 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<main class="hub">
+    <div class="logo">⚔</div>
+    <h1>МОРРИОН</h1>
+    <p class="subtitle">
+        Мир, переживший Катаклизм. Империи, эльфы, вампиры и Тёмные Земли ждут своих героев.
+    </p>
+
+    <div class="cards">
+        <a href="https://lore.morion-world.ru" class="card">
+            <div class="card-icon">📖</div>
+            <h2>Лор</h2>
+            <p>История, государства, фракции, персонажи и легенды Морриона — всё, что нужно знать о мире.</p>
+            <span class="card-link">Читать →</span>
+        </a>
+
+        <a href="https://map.morion-world.ru" class="card">
+            <div class="card-icon">🗺️</div>
+            <h2>Карта</h2>
+            <p>Интерактивная карта мира с городами, крепостями, лесами и тайными местами.</p>
+            <span class="card-link">Открыть →</span>
+        </a>
+    </div>
+
+    <footer>© МОРРИОН · 2026</footer>
+</main>
+
+</body>
+</html>
